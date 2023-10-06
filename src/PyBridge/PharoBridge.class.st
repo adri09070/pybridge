@@ -10,6 +10,48 @@ Class {
 	#tag : 'core'
 }
 
+{ #category : 'reflective operations' }
+PharoBridge class >> createInstance: aClassSymbol [
+
+	^ PharoBridgeObject new createInstance: aClassSymbol
+]
+
+{ #category : 'reflective operations' }
+PharoBridge class >> createInstance: aClassSymbol args: anArray [
+
+	^ PharoBridgeObject new createInstance: aClassSymbol args: anArray
+]
+
+{ #category : 'accessing' }
+PharoBridge class >> flushInstances [
+
+	PharoBridgeObject instanceMap removeAll
+]
+
+{ #category : 'reflective operations' }
+PharoBridge class >> isRunning [
+
+	| reverseServer |
+	reverseServer := PharoBridgeObject reverseServer.
+	^ reverseServer isNotNil and: [ reverseServer isRunning ]
+]
+
+{ #category : 'reflective operations' }
+PharoBridge class >> load: aClassSymbol [
+	"Ask for a class in the remote environment"
+
+	self isRunning ifFalse: [ self restart ].
+	^ PharoBridgeClass new loadClass: aClassSymbol
+]
+
+{ #category : 'reflective operations' }
+PharoBridge class >> loadClass: aClassSymbol [
+	"Ask for a class in the remote environment"
+
+	self isRunning ifFalse: [ self restart ].
+	^ PharoBridgeClass new loadClass: aClassSymbol
+]
+
 { #category : 'accessing' }
 PharoBridge class >> startAtPort: anInteger [
 
