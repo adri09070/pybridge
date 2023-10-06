@@ -54,6 +54,23 @@ PharoBridgeObject class >> decryptLiteral: aDict [
 ]
 
 { #category : 'reflective operations' }
+PharoBridgeObject class >> decryptObject: aDict [
+	| object ston_object remote_id |
+			
+	ston_object := aDict at: #value.
+	remote_id := ston_object at: #object_id.
+	object := self instanceMap
+		at: remote_id
+		ifAbsent: [ | new_object dict |			
+			new_object := (self string2class at: (aDict at: #kind)) new.
+			self instanceMap at: new_object bridgeUUID put: new_object.
+			dict := {(#remote_id -> remote_id)} asDictionary.
+			new_object post: dict action: #register_object.
+			new_object ].
+	^ object
+]
+
+{ #category : 'reflective operations' }
 PharoBridgeObject class >> decryptPharoElement: dict [
 
 	dict isArray ifTrue: [ 
@@ -109,6 +126,27 @@ PharoBridgeObject >> bridgeUUID [
 { #category : 'reflective operations' }
 PharoBridgeObject >> bridgeUUIDOf: anObject [
 	^ anObject identityHash 
+]
+
+{ #category : 'reflective operations' }
+PharoBridgeObject >> createInstance: aClassSymbol [
+	"Ask for an instances creation to the remote environment"
+	| dict |
+	dict := {(#class_name -> aClassSymbol)} asDictionary.
+	self instanceMap at: objectId put: self.
+	
+	self post: dict action: #create_instance
+]
+
+{ #category : 'reflective operations' }
+PharoBridgeObject >> createInstance: aClassSymbol args: anArray [
+	"Ask for an instances creation to the remote environment with args"
+
+	| dict |
+	dict := {(#class_name -> aClassSymbol).
+	(#args -> anArray)} asDictionary.
+	self instanceMap at: objectId put: self.
+	self post: dict action: #create_instance
 ]
 
 { #category : 'reflective operations' }
