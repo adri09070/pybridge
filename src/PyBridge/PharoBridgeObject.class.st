@@ -5,6 +5,7 @@ Class {
 		'objectId'
 	],
 	#classVars : [
+		'baseTargetUrl',
 		'instanceMap',
 		'reverseServer'
 	],
@@ -15,6 +16,42 @@ Class {
 	#package : 'PyBridge',
 	#tag : 'core'
 }
+
+{ #category : 'accessing' }
+PharoBridgeObject class >> baseTargetUrl [
+
+	^ baseTargetUrl ifNil: [ baseTargetUrl := 'http://127.0.0.1:5000/' ]
+]
+
+{ #category : 'accessing' }
+PharoBridgeObject class >> baseTargetUrl: anObject [
+
+	baseTargetUrl := anObject
+]
+
+{ #category : 'reflective operations' }
+PharoBridgeObject class >> decryptAnswer: aZNResponse [
+	| dict |
+	dict := STON fromString: aZNResponse contents.
+	^ self decryptPharoElement: dict
+]
+
+{ #category : 'reflective operations' }
+PharoBridgeObject class >> decryptException: aDict [
+
+	PyBridgeException
+		fromClass: (aDict at: #class)
+		signal: (aDict at: #args) asString
+		withArgs: (aDict at: #args)
+]
+
+{ #category : 'reflective operations' }
+PharoBridgeObject class >> decryptLiteral: aDict [
+
+	| value |
+	value := aDict at: #value.
+	^ PyBridgeObjectLiteral with: value
+]
 
 { #category : 'reflective operations' }
 PharoBridgeObject class >> decryptPharoElement: dict [
