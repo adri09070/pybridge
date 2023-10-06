@@ -1,24 +1,26 @@
 Trait {
-	#name : #PyBridgeIndexable,
-	#category : #'PyBridge-characteristics'
+	#name : 'PyBridgeIndexable',
+	#category : 'PyBridge-characteristics',
+	#package : 'PyBridge',
+	#tag : 'characteristics'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeIndexable >> at: anIndex [
 	^ self __getitem__: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeIndexable >> at: anIndex put: anObject [
 	^ self __setitem__: anIndex item: anObject 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeIndexable >> len [
 	^ self __len__
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeIndexable >> size [
 	^ self __len__ value
 ]

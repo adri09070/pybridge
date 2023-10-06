@@ -1,6 +1,6 @@
-Extension { #name : #Dictionary }
+Extension { #name : 'Dictionary' }
 
-{ #category : #'*PyBridge' }
+{ #category : '*PyBridge' }
 Dictionary >> asNativeObject [
 	| newDict isObject |
 	isObject := self isDictionary
@@ -13,7 +13,7 @@ Dictionary >> asNativeObject [
 	^ newDict
 ]
 
-{ #category : #'*PyBridge' }
+{ #category : '*PyBridge' }
 Dictionary >> convertToNativeObject [
 	| newDict isObject |
 	isObject := self isDictionary

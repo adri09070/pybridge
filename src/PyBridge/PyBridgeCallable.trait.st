@@ -1,9 +1,11 @@
 Trait {
-	#name : #PyBridgeCallable,
-	#category : #'PyBridge-characteristics'
+	#name : 'PyBridgeCallable',
+	#category : 'PyBridge-characteristics',
+	#package : 'PyBridge',
+	#tag : 'characteristics'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PyBridgeCallable >> call [
 	^ self __call__
 ]

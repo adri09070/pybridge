@@ -1,1 +1,1 @@
-Package { #name : #PyBridge }
+Package { #name : 'PyBridge' }

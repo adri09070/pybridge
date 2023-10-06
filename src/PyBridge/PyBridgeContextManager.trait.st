@@ -1,9 +1,11 @@
 Trait {
-	#name : #PyBridgeContextManager,
-	#category : #'PyBridge-characteristics'
+	#name : 'PyBridgeContextManager',
+	#category : 'PyBridge-characteristics',
+	#package : 'PyBridge',
+	#tag : 'characteristics'
 }
 
-{ #category : #manager }
+{ #category : 'manager' }
 PyBridgeContextManager >> with: aBlock [
 	| element |
 	element := self __enter__.

@@ -1,6 +1,6 @@
 Class {
-	#name : #PyReverseBridge,
-	#superclass : #Object,
+	#name : 'PyReverseBridge',
+	#superclass : 'Object',
 	#instVars : [
 		'server',
 		'instanceMap'
@@ -8,10 +8,12 @@ Class {
 	#classInstVars : [
 		'server'
 	],
-	#category : #'PyBridge-core'
+	#category : 'PyBridge-core',
+	#package : 'PyBridge',
+	#tag : 'core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> decodeValue: anObject [
 	| o |
 	anObject isArray
@@ -34,7 +36,7 @@ PyReverseBridge >> decodeValue: anObject [
 			newObj ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> deleteInstance: objectId [
 	| instance |
 	[ instance := self instanceMap removeKey: objectId.
@@ -44,7 +46,7 @@ PyReverseBridge >> deleteInstance: objectId [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> dispatchActions: req [
 	| action entity |
 	entity := STONJSON fromString: req entity string.
@@ -80,39 +82,39 @@ PyReverseBridge >> dispatchActions: req [
 				on: (entity at: #object_id) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> encryptBlock: anObject [
 	^ {(#kind -> #block).
 	(#value -> {(#object_id -> (self objectId: anObject))} asDictionary)}
 		asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> encryptClass: aClass [
 	^ {(#kind -> #type).
 	(#value -> {(#object_id -> (self objectId: aClass))} asDictionary)}
 		asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> encryptLiteral: aLiteral [
 	^ {(#kind -> #literal).
 	(#value -> aLiteral)} asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> encryptNil [
 	^ {(#kind -> #nil_object)} asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> encryptObject: anObject [
 	^ {(#kind -> #object).
 	(#value -> {(#object_id -> (self objectId: anObject))} asDictionary)}
 		asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> encryptValue: anObject [
 	anObject ifNil: [ ^ self encryptNil ].
 	(anObject isLiteral and: [ anObject isSymbol not ])
@@ -128,12 +130,12 @@ PyReverseBridge >> encryptValue: anObject [
 	^ self encryptObject: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> flushInstances [
 	self instanceMap removeAll
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> instanceCall: key on: objectId [
 	| instance res |
 	instance := self instanceMap
@@ -143,7 +145,7 @@ PyReverseBridge >> instanceCall: key on: objectId [
 	^ self encryptValue: res
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> instanceCall: key on: objectId withArg: anObject [
 	| instance res args |
 	instance := self instanceMap at: objectId.
@@ -155,7 +157,7 @@ PyReverseBridge >> instanceCall: key on: objectId withArg: anObject [
 	^ self encryptValue: res
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> instanceCall: key on: objectId withArgs: aDict [
 	| instance res newKey |
 	instance := self instanceMap
@@ -166,7 +168,7 @@ PyReverseBridge >> instanceCall: key on: objectId withArgs: aDict [
 	^ self encryptValue: res
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> instanceCall: key on: objectId withArgs: aDict orderedAs: aDictOrder [
 	| instance res newKey keyList newArgs |
 	instance := self instanceMap at: objectId.
@@ -179,17 +181,17 @@ PyReverseBridge >> instanceCall: key on: objectId withArgs: aDict orderedAs: aDi
 	^ self encryptValue: res
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> instanceMap [
 	^ instanceMap ifNil: [ instanceMap := Dictionary new ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> isRunning [
 	^ server isNotNil and: [ server server isRunning ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> loadClass: className from: objectId [
 	| class |
 	class := Smalltalk at: (className asSymbol).
@@ -198,18 +200,18 @@ PyReverseBridge >> loadClass: className from: objectId [
 	^ self encryptValue: class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> objectId: anObject [
 	^ anObject identityHash 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> registerLiteral: literal on: pythonId [
 	self instanceMap at: pythonId put: literal.
 	^ pythonId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> registerObject: objectId on: pythonId [	
 	| instance |
 	instance := self instanceMap at: objectId.
@@ -217,7 +219,7 @@ PyReverseBridge >> registerObject: objectId on: pythonId [
 	^ pythonId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> registerRoutes [
 	server
 		POST:
@@ -234,12 +236,12 @@ PyReverseBridge >> registerRoutes [
 	^ server
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> server [
 	^ server
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> start [
 	server := server
 		ifNil: [ Teapot
@@ -251,7 +253,7 @@ PyReverseBridge >> start [
 	self registerRoutes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyReverseBridge >> stop [
 	self isRunning ifFalse: [ ^ self ].
 	server stop

@@ -1,11 +1,11 @@
-Extension { #name : #Array }
+Extension { #name : 'Array' }
 
-{ #category : #'*PyBridge' }
+{ #category : '*PyBridge' }
 Array >> asNativeObject [
 	^ self collect: [ :val | val convertToNativeObject ]
 ]
 
-{ #category : #'*PyBridge' }
+{ #category : '*PyBridge' }
 Array >> convertToNativeObject [
 	^ self collect: [ :val | val convertToNativeObject ]
 ]

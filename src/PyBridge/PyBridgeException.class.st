@@ -1,14 +1,16 @@
 Class {
-	#name : #PyBridgeException,
-	#superclass : #Error,
+	#name : 'PyBridgeException',
+	#superclass : 'Error',
 	#instVars : [
 		'exceptionClass',
 		'arguments'
 	],
-	#category : #'PyBridge-core'
+	#category : 'PyBridge-core',
+	#package : 'PyBridge',
+	#tag : 'core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PyBridgeException class >> fromClass: aClassSymbol signal: aMessage withArgs: args [
 	| exception |
 	exception := self new.
@@ -17,22 +19,22 @@ PyBridgeException class >> fromClass: aClassSymbol signal: aMessage withArgs: ar
 	exception signal: aMessage.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeException >> arguments [
 	^ arguments
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeException >> arguments: anObject [
 	arguments := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeException >> exceptionClass [
 	^ exceptionClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeException >> exceptionClass: anObject [
 	exceptionClass := anObject
 ]

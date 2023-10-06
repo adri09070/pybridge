@@ -1,10 +1,12 @@
 Class {
-	#name : #PyBridgeClass,
-	#superclass : #PyBridgeObject,
-	#category : #'PyBridge-core'
+	#name : 'PyBridgeClass',
+	#superclass : 'PyBridgeObject',
+	#category : 'PyBridge-core',
+	#package : 'PyBridge',
+	#tag : 'core'
 }
 
-{ #category : #'reflective operations' }
+{ #category : 'reflective operations' }
 PyBridgeClass >> loadClass: aClassSymbol [
 	"Ask for a class in the remote environment"
 	| dict |
@@ -13,19 +15,19 @@ PyBridgeClass >> loadClass: aClassSymbol [
 	self post: dict action: #get_class
 ]
 
-{ #category : #'reflective operations' }
+{ #category : 'reflective operations' }
 PyBridgeClass >> new [
 	^ self new: {} asDictionary 
 ]
 
-{ #category : #'reflective operations' }
+{ #category : 'reflective operations' }
 PyBridgeClass >> new: arguments [
 	arguments ifEmpty: [ ^ self newFromDict: arguments ].
 	((arguments at: 1) isKindOf: Association) ifTrue: [ ^ self newFromDict: arguments ].
 	^ self newFromList: arguments.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PyBridgeClass >> newFromDict: arguments [
 	| args dict |
 	args := Dictionary new.
@@ -37,7 +39,7 @@ PyBridgeClass >> newFromDict: arguments [
 	^ self class decryptAnswer: (self post: dict action: #create_instance)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PyBridgeClass >> newFromList: arguments [
 	| args dict |
 	args := arguments collect: [ :item | self encryptValue: item ].
@@ -47,7 +49,7 @@ PyBridgeClass >> newFromList: arguments [
 	^ self class decryptAnswer: (self post: dict action: #create_instance)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : 'reflective operations' }
 PyBridgeClass >> printString [
 	| str res |
 	str := self class name asString.

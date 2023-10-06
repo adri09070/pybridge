@@ -1,9 +1,11 @@
 Trait {
-	#name : #PyBridgeIterable,
-	#category : #'PyBridge-characteristics'
+	#name : 'PyBridgeIterable',
+	#category : 'PyBridge-characteristics',
+	#package : 'PyBridge',
+	#tag : 'characteristics'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PyBridgeIterable >> do: aBlock [
 	| iterator raisedException tempNumber iterations |
 	iterator := self __iter__.
@@ -26,7 +28,7 @@ PyBridgeIterable >> do: aBlock [
 						ifFalse: [ e signal ] ] ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PyBridgeIterable >> doWithIndex: aBlock [
 	| iterator raisedException i |
 	iterator := self __iter__.

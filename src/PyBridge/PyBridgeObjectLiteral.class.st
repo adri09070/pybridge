@@ -1,16 +1,18 @@
 Class {
-	#name : #PyBridgeObjectLiteral,
-	#superclass : #PyBridgeObject,
+	#name : 'PyBridgeObjectLiteral',
+	#superclass : 'PyBridgeObject',
 	#instVars : [
 		'literalValue'
 	],
 	#classInstVars : [
 		'literalValue'
 	],
-	#category : #'PyBridge-core'
+	#category : 'PyBridge-core',
+	#package : 'PyBridge',
+	#tag : 'core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PyBridgeObjectLiteral class >> with: aLiteral [
 	| instance dict |
 	instance := self new literalValue: aLiteral; yourself.
@@ -19,38 +21,38 @@ PyBridgeObjectLiteral class >> with: aLiteral [
 	^ instance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> asNativeObject [
 	^ literalValue 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> convertToNativeObject [
 	^ literalValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> literalValue [
 	^ literalValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> literalValue: anObject [
 	literalValue := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> printOn: aStream [
 	aStream << literalValue asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> printString [
 
 	^ literalValue asString
 ]
 
-{ #category : #'spec - inspections' }
+{ #category : 'spec - inspections' }
 PyBridgeObjectLiteral >> pyBridgeInspectionSlots [
 
 	^ OrderedCollection with: (PyBridgeObjectInspectorNode new
@@ -59,7 +61,7 @@ PyBridgeObjectLiteral >> pyBridgeInspectionSlots [
 			   yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PyBridgeObjectLiteral >> value [
 	^ literalValue 
 ]
