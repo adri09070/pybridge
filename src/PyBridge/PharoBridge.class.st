@@ -54,6 +54,13 @@ PharoBridge class >> loadClass: aClassSymbol [
 ]
 
 { #category : 'accessing' }
+PharoBridge class >> start [
+
+	<script>
+	^ self startAtPort: 5000
+]
+
+{ #category : 'accessing' }
 PharoBridge class >> startAtPort: anInteger [
 
 	| server |
