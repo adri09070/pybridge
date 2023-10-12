@@ -25,6 +25,7 @@ PharoBridge class >> createInstance: aClassSymbol args: anArray [
 { #category : 'accessing' }
 PharoBridge class >> flushInstances [
 
+	<script>
 	PharoBridgeObject instanceMap removeAll
 ]
 
