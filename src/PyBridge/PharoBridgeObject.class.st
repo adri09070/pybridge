@@ -215,6 +215,19 @@ PharoBridgeObject >> post: dict action: action [
 			   type: ZnMimeType applicationSton)
 ]
 
+{ #category : 'printing' }
+PharoBridgeObject >> printOn: aStream [
+
+	^ self doesNotUnderstand:
+		  (Message selector: #printOn: argument: aStream)
+]
+
+{ #category : 'printing' }
+PharoBridgeObject >> printString [
+
+	^ self doesNotUnderstand: (Message selector: #printString)
+]
+
 { #category : 'reflective operations' }
 PharoBridgeObject >> reverseServer [
 	^ self class reverseServer 
