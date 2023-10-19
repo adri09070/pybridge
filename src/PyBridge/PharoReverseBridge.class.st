@@ -130,9 +130,9 @@ PharoReverseBridge >> encryptValue: anObject [
 		^ anObject ].
 	anObject isBlock ifTrue: [ ^ self encryptBlock: anObject ].
 	anObject isClass ifTrue: [ ^ self encryptClass: anObject ].
-	(anObject isKindOf: PyBridgeClass) ifTrue: [
+	(anObject isKindOf: PharoBridgeClass) ifTrue: [
 		^ self encryptClass: anObject ].
-	(anObject isKindOf: PyBridgeObjectLiteral) ifTrue: [
+	(anObject isKindOf: PharoBridgeObjectLiteral) ifTrue: [
 		^ anObject value ].
 	^ self encryptObject: anObject
 ]
