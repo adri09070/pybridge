@@ -49,8 +49,9 @@ PharoBridgeObject class >> decryptException: aDict [
 PharoBridgeObject class >> decryptLiteral: aDict [
 
 	| value |
+	Transcript traceCr: 'decryptLiteral: ' , aDict.
 	value := aDict at: #value.
-	^ PyBridgeObjectLiteral with: value
+	^ PharoBridgeObjectLiteral with: value
 ]
 
 { #category : 'reflective operations' }
