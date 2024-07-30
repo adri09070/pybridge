@@ -50,7 +50,7 @@ PharoBridgeObject class >> decryptLiteral: aDict [
 
 	| value |
 	value := aDict at: #value.
-	^ PyBridgeObjectLiteral with: value
+	^ PharoBridgeObjectLiteral with: value
 ]
 
 { #category : 'reflective operations' }
@@ -191,6 +191,12 @@ PharoBridgeObject >> initialize [
 { #category : 'reflective operations' }
 PharoBridgeObject >> instanceMap [
 	^ self class instanceMap
+]
+
+{ #category : 'accessing' }
+PharoBridgeObject >> objectId [
+
+	^ objectId
 ]
 
 { #category : 'reflective operations' }
