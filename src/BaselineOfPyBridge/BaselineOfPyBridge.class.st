@@ -1,19 +1,21 @@
 Class {
-	#name : #BaselineOfPyBridge,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfPyBridge
+	#name : 'BaselineOfPyBridge',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfPyBridge',
+	#package : 'BaselineOfPyBridge'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfPyBridge >> baseline: spec [
+
 	<baseline>
-	spec
-		for: #common
-		do: [ self setUpDependencies: spec.
-			spec package: 'PyBridge' with: [ spec requires: #('Teapot') ] ]
+	spec for: #common do: [
+		self setUpDependencies: spec.
+		spec package: 'PyBridge' with: [ spec requires: #( 'Teapot' ) ].
+		spec group: 'default' with: #( 'PyBridge' ) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfPyBridge >> setUpDependencies: spec [
 
 	spec
