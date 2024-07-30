@@ -49,7 +49,6 @@ PharoBridgeObject class >> decryptException: aDict [
 PharoBridgeObject class >> decryptLiteral: aDict [
 
 	| value |
-	Transcript traceCr: 'decryptLiteral: ' , aDict.
 	value := aDict at: #value.
 	^ PharoBridgeObjectLiteral with: value
 ]
@@ -192,6 +191,12 @@ PharoBridgeObject >> initialize [
 { #category : 'reflective operations' }
 PharoBridgeObject >> instanceMap [
 	^ self class instanceMap
+]
+
+{ #category : 'accessing' }
+PharoBridgeObject >> objectId [
+
+	^ objectId
 ]
 
 { #category : 'reflective operations' }
